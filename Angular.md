@@ -28,8 +28,56 @@ npm install//安装Angular cli到已有项目，当前地址为项目根目录
 selector的便是元素选择器,在所需要的地方(html,jsp)添加元素选择器.就能显示成功
 <app-heroes></app-heroes>
 
-# 数据的双向绑定
-    
+注:1若新建component需要app.model中declarations中添加当前组件
+    2 若使用ngModel需要app.model中添加Form
+    ```
+    import { FormsModule } from '@angular/forms';
+    ...
+     imports: [
+    BrowserModule,FormsModule
+  ],
+    ```
+
+
+Angular js指令
+*ngfor 遍历
+``` <li *ngFor="let hero of heroes"> ```
+
+# 主从组件
+即需要与父组件之间进行数据的交互
+从父组件中传给子组件(hero 元素)
+父组件
+<app-hero-detail [hero]="selectedHero"></app-hero-detail>
+子组件
+import { Component, OnInit, Input } from '@angular/core';
+
+@Input() hero: Hero;
+
+
+# 发送request
+- 1.创建Service
+ng generate service 组件名
+HeroService如下
+```
+import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class HeroService {
+
+  constructor() { }
+
+}
+```
+修改component构造器
+import { HeroService } from '../hero.service';
+constructor(private heroService: HeroService) { }
+
+
+
+
+
 
 
 
